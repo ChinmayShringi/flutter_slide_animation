@@ -33,6 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
   var titles=['Connect With\nother skincare\nlovers.','The perfect\nproduct for your\nskin type.'];
   var subtitles=['Engage with others in\nthe community.','Find products\nthat work for you'];
   var i=0;
+  bool _visible = true;
   var size;
   @override
   Widget build(BuildContext context) {
@@ -44,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
             if(i!=1) {
               setState(() {
                 i = i + 1;
+                _visible=false;
               });
             }
           }
@@ -51,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
             if(i!=0) {
               setState(() {
                 i = i - 1;
+                _visible=false;
               });
             }
           }
@@ -87,6 +90,15 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
+                              AnimatedOpacity(
+                              opacity: _visible ? 1.0 : 0.0,
+                                duration: const Duration(milliseconds:100),
+                                onEnd: ()=>{
+                                  setState(()=>{
+                                    _visible=true
+                                  })
+                                },
+                                child:
                                   Text(
                                     this.titles[i],
                                     textAlign: TextAlign.center,
@@ -94,11 +106,22 @@ class _MyHomePageState extends State<MyHomePage> {
                                         fontSize: 38,
                                         fontWeight: FontWeight.bold),
                                   )
+                              ),
                                 ],
                               )),
+
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              AnimatedOpacity(
+                                opacity: _visible ? 1.0 : 0.0,
+                                duration: const Duration(milliseconds:100),
+                                onEnd: ()=>{
+                                  setState(()=>{
+                                    _visible=true
+                                  })
+                                },
+                                child:
                               Text(
                                 this.subtitles[i],
                                 textAlign: TextAlign.center,
@@ -107,12 +130,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                     color: Colors.black54,
                                     fontWeight: FontWeight.w300),
                               )
-                            ],
+                  ),]
                           ),
                           SizedBox(height:20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+
                               Text(
                                 'Skip',
                                 textAlign: TextAlign.center,
@@ -141,7 +165,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [Icon(this.icon[i])],
+                            children: [
+                              AnimatedOpacity(
+                                opacity: _visible ? 1.0 : 0.0,
+                                duration: const Duration(milliseconds:100),
+                                onEnd: ()=>{
+                                  setState(()=>{
+                                    _visible=true
+                                  })
+                                },
+                                child: Icon(this.icon[i]),
+                              ),]
                           ),
                         )),
                   ),
